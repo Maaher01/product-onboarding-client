@@ -1,0 +1,46 @@
+.newProduct {
+	width: 100%;
+	flex-grow: 1;
+	padding: 1rem;
+	background-color: #fff;
+}
+
+.newProduct p {
+	margin-top: 1rem;
+}
+
+.newProductForm {
+	display: flex;
+	flex-direction: column;
+}
+
+.newProductForm label {
+	margin-top: 1rem;
+}
+
+.newProductForm input[type="text"] {
+	font-family: "Open Sans", sans-serif;
+	width: 100%;
+	min-height: 50px;
+	font-size: 1rem;
+	padding: 0.25rem;
+	border-radius: 0.25rem;
+	margin-right: 0.25rem;
+	outline: none;
+}
+
+.newProductForm button {
+	margin-top: 1rem;
+	height: 50px;
+	min-width: 50px;
+	border-radius: 10px;
+	padding: 0.5rem;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+@media only screen and (min-width: 610px) {
+	.newProductForm textarea {
+		height: 300px;
+	}
+}

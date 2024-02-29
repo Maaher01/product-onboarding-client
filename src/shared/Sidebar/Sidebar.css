@@ -1,0 +1,29 @@
+.Sidebar {
+	height: 100%;
+	background-color: #333;
+	padding: 15px 30px;
+	top: 0;
+	left: 0;
+	position: fixed;
+}
+
+.Sidebar h4 {
+	margin-bottom: 30px;
+}
+
+.Sidebar h4 a {
+	color: white;
+	text-decoration: none;
+}
+
+.Sidebar ul {
+	color: #fff;
+	list-style-type: none;
+	margin-bottom: 0px;
+}
+
+.Sidebar li a {
+	text-decoration: none;
+	color: #fff;
+	font-size: 18px;
+}
