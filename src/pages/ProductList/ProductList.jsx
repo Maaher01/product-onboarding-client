@@ -3,12 +3,13 @@ import { useContext } from "react";
 import ProductContext from "../../context/ProductContext";
 import { Plus } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
+import SearchForm from "../../components/SearchForm/SearchForm";
 
 const ProductList = () => {
 	const { searchResults, isLoading, fetchError } = useContext(ProductContext);
 
 	return (
-		<main>
+		<main className="Home">
 			<div className="d-flex justify-content-between mb-4 mt-5">
 				<h5>All Products</h5>
 				<Link to={`/products/add`}>
@@ -17,6 +18,10 @@ const ProductList = () => {
 						New Product
 					</button>
 				</Link>
+			</div>
+
+			<div className="d-flex justify-content-end mb-4">
+				<SearchForm />
 			</div>
 
 			{isLoading && <p className="statusMsg">Loading Products...</p>}
