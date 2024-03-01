@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../api/api";
 import { useState, useContext } from "react";
 import ProductContext from "../../context/ProductContext";
+import axios from "axios";
 
 const NewProduct = () => {
 	const { products, setProducts } = useContext(ProductContext);
@@ -21,8 +22,8 @@ const NewProduct = () => {
 				"http://localhost:3000/api/products/add",
 				newProduct
 			);
-			const allProducts = [...products, req.data];
-			setProducts(allProducts);
+			const allProducts = await axios.get("http://localhost:3000/api/products");
+			setProducts(allProducts.data.data);
 			setProductName("");
 			setPrice("");
 			navigate("/products");

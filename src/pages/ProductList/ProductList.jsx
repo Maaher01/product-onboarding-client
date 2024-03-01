@@ -20,7 +20,7 @@ const ProductList = () => {
 				</Link>
 			</div>
 
-			<div className="d-flex justify-content-end mb-4">
+			<div className="mb-4">
 				<SearchForm />
 			</div>
 

@@ -1,41 +1,67 @@
 import { Form, Formik } from "formik";
 import "./LoginForm.css";
 import CustomInput from "../CustomInput/CustomInput";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const onSubmit = async (_values, actions) => {
-	setTimeout(() => {
-		actions.resetForm();
-	});
+const LoginForm = () => {
+	const navigate = useNavigate();
+
+	const handleClick = (event) => {
+		event.preventDefault();
+		navigate("/register");
+	};
+
+	const handleSubmit = async (values, actions) => {
+		try {
+			const response = await axios.post(
+				"http://localhost:3000/api/auth/login",
+				values
+			);
+			const { token } = response.data;
+			localStorage.setItem("token", token);
+			navigate("/");
+		} catch (err) {
+			console.error("Login failed:", err.response.data.error);
+			actions.setSubmitting(false);
+		}
+	};
+
+	return (
+		<Formik
+			initialValues={{
+				email: "",
+				password: "",
+			}}
+			onSubmit={handleSubmit}
+		>
+			{({ isSubmitting }) => (
+				<Form>
+					<CustomInput
+						label="Email"
+						type="email"
+						name="email"
+						placeholder="Enter your email"
+					/>
+					<CustomInput
+						label="Password"
+						type="password"
+						name="password"
+						placeholder="Enter your password"
+					/>
+					<button disabled={isSubmitting} type="submit">
+						{isSubmitting ? "Logging in..." : "Login"}
+					</button>
+					<p className="small fw-bold mt-2 pt-1 mb-0">
+						Don't have an account?{" "}
+						<span onClick={handleClick} className="link-danger">
+							Register
+						</span>
+					</p>
+				</Form>
+			)}
+		</Formik>
+	);
 };
-
-const LoginForm = () => (
-	<Formik
-		initialValues={{
-			email: "",
-			password: "",
-		}}
-		onSubmit={onSubmit}
-	>
-		{({ isSubmitting }) => (
-			<Form>
-				<CustomInput
-					label="Email"
-					type="email"
-					name="email"
-					placeholder="Enter your email"
-				/>
-				<CustomInput
-					label="Password"
-					type="password"
-					name="password"
-					placeholder="Enter your password"
-				/>
-				<button disabled={isSubmitting} type="submit">
-					Login
-				</button>
-			</Form>
-		)}
-	</Formik>
-);
 
 export default LoginForm;

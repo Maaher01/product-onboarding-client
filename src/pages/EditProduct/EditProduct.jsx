@@ -31,7 +31,10 @@ const EditProduct = () => {
 		};
 
 		try {
-			const req = api.put(`http://localhost:3000/api/products/${id}`, updatedProduct);
+			const req = api.put(
+				`http://localhost:3000/api/products/${id}`,
+				updatedProduct
+			);
 			setProducts(
 				products.map((product) =>
 					product.productId === id ? { ...req.data } : product
