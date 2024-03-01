@@ -3,8 +3,11 @@ import "./LoginForm.css";
 import CustomInput from "../CustomInput/CustomInput";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import AuthContext from "../../context/AuthContext";
+import { useContext } from "react";
 
 const LoginForm = () => {
+	const { login } = useContext(AuthContext);
 	const navigate = useNavigate();
 
 	const handleClick = (event) => {
@@ -19,10 +22,10 @@ const LoginForm = () => {
 				values
 			);
 			const { token } = response.data;
-			localStorage.setItem("token", token);
+			login(token);
 			navigate("/");
 		} catch (err) {
-			console.error("Login failed:", err.response.data.error);
+			console.error("Login failed:", err);
 			actions.setSubmitting(false);
 		}
 	};

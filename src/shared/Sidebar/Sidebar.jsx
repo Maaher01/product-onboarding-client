@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
-import { useNavigate } from "react-router-dom";
+import { Box } from "react-bootstrap-icons";
+import { BoxArrowLeft } from "react-bootstrap-icons";
+import AuthContext from "../../context/AuthContext";
+import { useContext } from "react";
 
 const Sidebar = ({ title }) => {
-	const navigate = useNavigate();
+	const { logout } = useContext(AuthContext);
 
 	const handleLogout = () => {
-		localStorage.removeItem("token");
-		navigate("/login");
+		logout();
 	};
 
 	return (
@@ -15,11 +17,15 @@ const Sidebar = ({ title }) => {
 			<h4>
 				<Link to="/">{title}</Link>
 			</h4>
-			<ul>
+			<ul className="d-flex flex-column gap-2">
 				<Link to="products">
-					<li>All Products</li>
+					<li className="d-flex gap-2 align-items-center">
+						<Box></Box>All Products
+					</li>
 				</Link>
-				<li onClick={handleLogout}>Logout</li>
+				<li className="d-flex gap-2 align-items-center" onClick={handleLogout}>
+					<BoxArrowLeft></BoxArrowLeft>Logout
+				</li>
 			</ul>
 		</div>
 	);

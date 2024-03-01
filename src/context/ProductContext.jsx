@@ -3,7 +3,7 @@ import useAxiosFetch from "../hooks/useAxiosFetch";
 
 const ProductContext = createContext({});
 
-export const DataProvider = ({ children }) => {
+export const ProductDataProvider = ({ children }) => {
 	const [products, setProducts] = useState([]);
 	const [search, setSearch] = useState("");
 	const [searchResults, setSearchResults] = useState([]);

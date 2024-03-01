@@ -11,7 +11,7 @@ const ProductList = () => {
 	return (
 		<main className="Home">
 			<div className="d-flex justify-content-between mb-4 mt-5">
-				<h5>All Products</h5>
+				<h4>All Products</h4>
 				<Link to={`/products/add`}>
 					<button className="btn btn-primary btn-sm">
 						<Plus></Plus>
