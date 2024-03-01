@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import NewProduct from "./pages/NewProduct/NewProduct";
+import EditProduct from "./pages/EditProduct/EditProduct";
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 					<Route path="products">
 						<Route index element={<ProductList />} />
 						<Route path="add" element={<NewProduct />} />
+						<Route path="edit/:productId" element={<EditProduct />} />
 					</Route>
 					<Route path="*" element={<PageNotFound />} />
 				</Route>

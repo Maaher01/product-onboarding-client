@@ -4,6 +4,7 @@ import api from "../../../../api/api";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import ProductContext from "../../../../context/ProductContext";
+import { Link } from "react-router-dom";
 
 const Product = ({ product }) => {
 	const { products, setProducts } = useContext(ProductContext);
@@ -11,7 +12,7 @@ const Product = ({ product }) => {
 
 	const { productId } = useParams();
 
-	//Delete a blog
+	//Delete a product
 	const handleDelete = async (id) => {
 		try {
 			await api.delete(`http://localhost:3000/api/products/${id}`);
@@ -30,9 +31,11 @@ const Product = ({ product }) => {
 			<td className="text-center">{product.productName}</td>
 			<td className="text-center">Tk.{product.price}</td>
 			<td className="d-flex gap-1">
-				<button className="btn btn-success btn-sm">
-					<Pencil></Pencil>
-				</button>
+				<Link to={`/products/edit/${product.productId}`}>
+					<button className="btn btn-success btn-sm">
+						<Pencil></Pencil>
+					</button>
+				</Link>
 				<button
 					className="btn btn-danger btn-sm"
 					onClick={() => handleDelete(product.productId)}
