@@ -4,11 +4,12 @@ import CustomInput from "../CustomInput/CustomInput";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../context/AuthContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const LoginForm = () => {
 	const { login } = useContext(AuthContext);
 	const navigate = useNavigate();
+	const [error, setError] = useState("");
 
 	const handleClick = (event) => {
 		event.preventDefault();
@@ -26,6 +27,7 @@ const LoginForm = () => {
 			navigate("/");
 		} catch (err) {
 			console.error("Login failed:", err);
+			setError(err.response.data.message);
 			actions.setSubmitting(false);
 		}
 	};
@@ -52,6 +54,11 @@ const LoginForm = () => {
 						name="password"
 						placeholder="Enter your password"
 					/>
+					{error && (
+						<p style={{ color: "red" }} className="error-message">
+							{error}
+						</p>
+					)}
 					<button disabled={isSubmitting} type="submit">
 						{isSubmitting ? "Logging in..." : "Login"}
 					</button>

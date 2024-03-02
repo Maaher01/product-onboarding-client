@@ -4,9 +4,11 @@ import CustomInput from "../CustomInput/CustomInput";
 import { registerFormSchema } from "../../schema";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const RegisterForm = () => {
 	const navigate = useNavigate();
+	const [error, setError] = useState("");
 
 	const handleClick = (event) => {
 		event.preventDefault();
@@ -23,6 +25,7 @@ const RegisterForm = () => {
 			navigate("/login");
 		} catch (error) {
 			console.error("Registration failed:", error.response.data.error);
+			setError(error.response.data.error);
 			actions.setSubmitting(false);
 		}
 	};
@@ -71,6 +74,11 @@ const RegisterForm = () => {
 						name="phone"
 						placeholder="Enter your phone number"
 					/>
+					{error && (
+						<p style={{ color: "red" }} className="error-message">
+							{error}
+						</p>
+					)}
 					<button disabled={isSubmitting} type="submit">
 						{isSubmitting ? "Registering..." : "Register"}
 					</button>
